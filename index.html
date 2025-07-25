@@ -343,12 +343,12 @@
                 <div class="mt-8 text-center">
                     <h3 class="text-xl font-bold text-gray-100 mb-4" data-lang-key="youMightAlsoLike">You Might Also Like This:</h3>
                     <div id="static-movie-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-                        <!-- Static Movie Card: Cinema 18 (Placeholder for consistent size) -->
-                        <div class="static-movie-card" data-media-id="0" data-media-type="site">
-                            <img src="https://live.staticflickr.com/65535/54677682364_f8f8169b16.jpg" alt="Cinema 18 Site Poster" loading="lazy" onerror="this.src='https://placehold.co/300x450/FF0000/FFFFFF?text=IMAGE+ERROR';">
+                        <!-- Static Movie Card: Intimacy (2001) - Corrected ID and type -->
+                        <div class="static-movie-card" data-media-id="11845" data-media-type="movie">
+                            <img src="https://image.tmdb.org/t/p/w300/I0mlv1FahaLJqu2ByffMXEn4NN.jpg" alt="Intimacy (2001) Poster" loading="lazy" onerror="this.src='https://placehold.co/300x450/FF0000/FFFFFF?text=IMAGE+ERROR';">
                             <div class="info">
-                                <h3>Cinema 18</h3>
-                                <p>Site</p>
+                                <h3>Intimacy</h3>
+                                <p>2001</p>
                             </div>
                         </div>
                         <!-- Static Movie Card: 3-D Sex and Zen: Extreme Ecstasy (2011) -->
@@ -1518,7 +1518,8 @@
                 const mediaType = clickedCard.dataset.mediaType;
                 const mediaTitle = clickedCard.querySelector('h3').textContent; // Get title for slug
                 
-                if (mediaId && mediaType) {
+                // Only proceed if mediaType is 'movie' or 'tv'
+                if ((mediaType === 'movie' || mediaType === 'tv') && mediaId) { // MODIFIED LINE
                     if (!staticAdTriggeredMediaIds.has(mediaId)) {
                         // First click: Open ad
                         window.open(getRandomAdLink(), '_blank'); // Menggunakan tautan acak
@@ -1530,6 +1531,11 @@
                         fetchAndDisplayMediaDetail(mediaId, mediaType, mediaTitle);
                         console.log(`Navigating to details for static card: ${mediaTitle}`);
                     }
+                } else if (mediaType === 'site') { // Handle the 'site' card specifically
+                    console.log('Clicked on site card, not fetching TMDB details.');
+                    // Optionally, you could add different behavior for the site card here,
+                    // like navigating to the home page or showing a message.
+                    // For now, it just prevents the error.
                 }
             }
         });
