@@ -1,0 +1,9 @@
+# robots.txt for Cinema 18 (https://cinema-18.pages.dev/)
+
+User-agent: *
+Allow: /
+# Disallow any specific paths if necessary, e.g.:
+# Disallow: /search_results_page/ 
+# Disallow: /admin/ 
+
+Sitemap: https://cinema-18.pages.dev/sitemap.xml
